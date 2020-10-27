@@ -1,0 +1,23 @@
+#lecture 1
+1.types of knowledge，
+    （1）declarative knowledge，声明式的
+    （2）imperative knowledge，命令式的
+2.BASIC MACHINE ARCHITECTURE，计算机结构
+    （1）MEMORY，存储数据和指令
+    （2）CONTROL UNIT，控制单元，
+    （3）ARITHMETIC LOGIC UNIT，运算单元，
+    （4）INPUT and OUTPUT
+3.BASIC PRIMITIVES,基本操作
+    （1）syntax，语法正确
+    （2）static semantics，语义正确
+4.objects，对象
+    （1）每个对象具有类型
+    （2）对象分为scalar（标量）和non-scalar（矢量），scalar 不可再分，non-scalar有内部结构，可以再分
+    （3）标量类型：int,整形；float，浮点型；bool，返回True or False; NoneType,特殊类型，返回None
+        使用type()查看对象的数据类型，eg：type（5）
+        转换数据类型，eg:int（3.9） 3.9 -> 3;float(3) 3->3.0
+5.EXPRESSIONS，表达式
+6.OPERATORS ON ints and floats，运算操作符
+    + - * / 
+    %：取余 
+    i**J：I的j次方

@@ -1,0 +1,37 @@
+lecture 10
+UNDERSTANDING PROGRAM EFFICIENCY,理解程序效率
+1.HOW TO EVALUATE EFFICIENCY OF PROGRAMS:
+    (1)measure with a timer:
+        import time
+    (2)COUNTING OPERATIONS
+    (3)ORDERS OF GROWTH (增长级)
+        not worry about small variations in implementation
+        look at largest factors in run time
+        ignore addictive constants
+        ignore multiplicative constants
+
+eg:O(n) vs 5n+2 steps
+def fact_iter(n):
+    answer = 1
+    while n > 1:
+        answer=answer*n
+        n=n-1
+    return answer
+    (4)LINEAR COMPLEXITY：
+        Simple iteractive loop algorithms
+    (5)QUADRATIC COMPLEXITY:
+        nested loop
+eg:
+def intersect(L1, L2):
+    tmp = []
+    for e1 in L1:
+        for e2 in L2:
+            if e1 == e2:
+                tmp.append(e1)  #O(n^2)
+    res = []
+    for e in tmp:
+        if not(e in res):
+            res.append(e)  #O(n^2)
+    return res
+
+

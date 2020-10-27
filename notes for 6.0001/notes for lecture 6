@@ -1,0 +1,42 @@
+lecture 6
+RECURSION,DICTIONARIES 递归和字典
+1.RECURSION，递归
+    (1)divide-and-conquer:reduce a problem to simpler versions of the same problem
+    将一个问题分解为该问题的简单版本
+    (2)Semantically(语义上),a function calls itself（函数调用其本身）
+        goal is to NOT have infinite recursion：
+            must have 1 or more base cases that are easy to solve
+    eg:TOWERS OF HANOI
+       Fibonacci numbers
+       FIBONACCI is INEFFICIENT,recalculating the same values many times!
+def fib_efficient(n, d): 
+    if n in d:
+        return d[n]
+    else:
+        ans = fib_efficient(n-1, d) + fib_efficient(n-2, d) 
+        d[n] = ans #将每次计算的结果存在字典d中，dictionary d is mutable.
+        return ans
+d = {1:1, 2:2}
+2.DICTIONARIES
+    (1)store pairs of data key and value 存储一对数据，key and value
+    my_dict ={} # an empty dictionary
+    grades = {'Ana':'B', 'John':'A+', 'Denise':'A', 'Katy':'A'}
+    grades['John'] -> evaluates to 'A+'
+    grades['Sylvan'] -> gives an error,because key 'Sylvan' doesn't exist
+    add an entry:
+        grades['Sylvan'] = 'A'
+    delete entry:
+        del(grades['Ana']) #'Ana' is a key in grades
+    test if key in dictionary:
+        'John' in grades -> returns True ('John' is a key in grades)
+    grades.keys() #returns ['Denise','Katy','John','Ana'] (返回的是列表类型，不保证顺序)
+    grades.values() #returns ['A', 'A', 'A+', 'B'] (返回的是列表类型，不保证顺序)
+    (2)DICTIONARY KEYS and VALUES
+        values can be any type
+        keys must be unique and immutable
+        no order to keys or values!
+    (3)list vs dict
+        list:ordered sequence of elements
+             index is an integer
+        dict:no order is guaranteed
+             matches “keys” to “values”

@@ -1,0 +1,125 @@
+lecture 8
+OBJECT ORIENTED PROGRAMMING,面向对象编程
+(1)every kind of data is an object,and every object has a type
+an object is an instance of a type, eg:1234 is an instance of an int
+(2)ADVANTAGES OF OOP,面向对象编程的优点
+    类的使用使得代码复用更简单
+    继承允许子类重定义或扩展父类的行为
+(3)distinction between creating a class and using an instance of the class
+   #创建类与使用类之间的差别
+   creating the class:#创建类
+        defining the class name#定义类名
+        defining class attributes#定义类的属性
+   using the class:#使用类
+        creating new instances of objects #创建新的对象实例
+        doing operations on the instances #对该实例进行操作
+(4)DEFINE YOUR OWN TYPES 
+    class, keyword
+    class Coordinate(object): #class is a keyword,Coordinate is name,object is class parent
+        #define attributes here  #使用缩进表示class定义内的语句
+        #the word object means that Coordinate is a Python object and inherits all its attributes
+        #Coordinate is a subclass of object
+        #object is a superclass of Coordinate
+        #Coordinate是一个对象，Coordinate是object的子类，object是Coordinate的父类
+(5)ATTRIBUTES:
+    data attributes and methods(procedural attributes)
+    methods are functions that only work with this class
+    how to create an instance of object:
+        use __init__ to initialize some data attributes
+eg: class Coordinate(object):
+        def __init__(self, x, y):# special method to create an instance
+            self. = x 
+            self. = y
+    c=Coordinate(0,0)
+    origin = Coordinate(0,0) #don’t provide argument for self
+    print(c.x)
+    print(origin.x)
+    method:procedural attribute, like a function that works only with this class
+        #procedural attribute
+        convention is to use self as the name of the first argument of all methods
+        the “.” operator is used to access any attribute(a data attribute/method)
+eg:(DEFINE A METHOD FOR THE Coordinate CLASS)
+class Coordinate(object):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    def distance(self, other):
+        x_diff_sq = (self.x-other.x)**2 
+        y_diff_sq = (self.y-other.y)**2 
+        return (x_diff_sq + y_diff_sq)**0.5
+    how to use method:
+        c = Coordinate(3,4)
+        zero = Coordinate(0,0)
+        print(Coordinate.distance(c, zero))
+        #Coordinate is the name of class
+        #distance is the name of method
+        # c and zero are parameters to call the method on
+    PRINT REPRESENTATION OF AN OBJECT
+        __str__ method #Python calls the __str__ method when used with print on your class object
+eg:
+class Coordinate(object):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    def distance(self, other):
+        x_diff_sq = (self.x-other.x)**2 
+        y_diff_sq = (self.y-other.y)**2 
+        return (x_diff_sq + y_diff_sq)**0.5
+    def __str__(self):#"__str__"is name of special method
+        return "<"+str(self.x)+","+str(self.y)+">"# must return a string
+c = Coordinate(3,4)
+print(c) -> <3,4>
+    use isinstance() to check if an object is a Coordinate:
+        print(isinstance(c, Coordinate)) -> True
+    SPECIAL OPERATORS：
+        +, -, ==, <, >, len(), print,......
+        __add__(self, other) -> self+other
+        __sub__(self, other) -> self-other
+        __eq__(self, other) -> self==other
+        __lt__(self, other) -> self<other
+        __len__(self)  -> len(self)
+        __str__(self)  -> print(self)
+        ... and others
+example:fractions
+class Fraction(object):
+    """
+    A number represented as a fraction
+    """
+    def __init__(self, num, denom):
+        """ num and denom are integers """
+        assert type(num) == int and type(denom) == int, "ints not used" #若num或denom不是整数，出现AssertionError: ints not used
+        self.num = num
+        self.denom = denom
+    def __str__(self):
+        """ Retunrs a string representation of self """
+        return str(self.num) + "/" + str(self.denom)
+    def __add__(self, other):
+        """ Returns a new fraction representing the addition """
+        top = self.num*other.denom + self.denom*other.num
+        bott = self.denom*other.denom
+        return Fraction(top, bott)
+    def __sub__(self, other):
+        """ Returns a new fraction representing the subtraction """
+        top = self.num*other.denom - self.denom*other.num
+        bott = self.denom*other.denom
+        return Fraction(top, bott)
+    def __float__(self):
+        """ Returns a float value of the fraction """
+        return self.num/self.denom
+    def inverse(self):
+        """ Returns a new fraction representing 1/self """
+        return Fraction(self.denom, self.num)
+
+a = Fraction(1,4)
+b = Fraction(3,4)
+c = a + b # c is a Fraction object
+print(c)
+print(float(c))
+print(Fraction.__float__(c))
+print(float(b.inverse()))
+
+
+
+
+
+

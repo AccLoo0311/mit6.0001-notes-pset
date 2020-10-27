@@ -1,0 +1,59 @@
+#lecture 2：BRANCHING, ITERATION 分支，迭代
+1.STRINGS,字符串，用单/双引号包围
+    （1）concatenate，串联  eg:hi = "hello there"  name = "ana"    greet = hi + name
+2.OUTPUT: print,关键字
+    （1）使用“，”python自动加空格，操作的对象不一定是字符串类型
+        使用“+”，python不加空格，操作的对象必须是是字符串类型
+        x =1
+        print(x)
+        x_str = str(x)
+        print("my fav num is", x, ".", "x =", x)#输出：my fav num is 1 . x = 1
+        print("my fav num is " + x_str + ". " + "x = " + x_str)#输出：my fav num is 1. x = 1
+3.INPUT:input(""),该操作将“”里的内容打印出来，用户输入的是字符串类型，需进行数据类型转换
+4.COMPARISON OPERATORS，比较运算符，可比较int float string类型
+    （1）返回boolean类型，True or False
+        i>j
+        i >= j
+        i<j
+        i <= j
+        i == j# =是赋值语句，==判断符号两边是否相等，返回True or False
+        i != j
+5.LOGIC OPERATORS，逻辑运算符
+        （以下的a和b都是bool类型）
+    （1）not a #非
+        a and b #与
+        a or b #或
+6.BRANCHING，分支
+    （1）if <condition>: #如果<condition>里的内容为True，执行block内的语句，否则跳过block内的语句
+            <expression> #使用identation（缩进）表示一个block里的语句
+            <expression>
+            ...
+        elif <condition>:
+            <expression>
+            <expression>
+            ...
+        else:
+            <expression>
+            <expression> 
+    （2）while <condition>: #重复执行block内的语句，直到<condition>为False为止
+            <expression> 
+            <expression>
+    （3）for loops,
+        for <variable> in range(<some_num>):#<variable>从0开始，每循环一次，<variable>=<variable>+1，
+            直到<some_num>-1（共循环<some_num>次）
+            <expression>
+            <expression> 
+        #range(start,stop,step）#从start值开始，以step为步长循环直到stop-1停止
+    （4） break，退出循环，exits only innermost loop!仅仅退出最内层的循环
+        eg:while <condition_1>:
+                while <condition_2>:
+                    <expression_a> 
+                    break   #只是退出<condition_2>的循环，继续执行<condition_1>的循环
+                    <expression_b> #出现break后，不再执行后面的的语句，即<expression_b>
+                <expression_c>
+    （5）for 循环与while循环的比较：
+        都可以用break来结束循环
+        使用while循环可以使用计数器来规定循环次数，但必须在循环开始前声明该计数器，并在循环内改变该计数器的值
+
+
+

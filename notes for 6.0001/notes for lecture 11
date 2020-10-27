@@ -1,0 +1,104 @@
+lecture 11
+UNDERSTANDING PROGRAM EFFICIENCY: 2
+1.CONSTANT COMPLEXITY:
+    complexity independent of inputs
+    can have loops or recursive calls, but ONLY IF number of iteractions or calls independent of size of input
+2.LOGARITHMIC COMPLEXITY:reduce problem in half each time through process
+    (1)example:
+        bisection search & binary search of a list
+    (2) BISECTION SEARCH:
+        complexity of recursion is O(log n) – where n is len(L)
+eg:
+def bisect_search1(L, e):
+    if L == []: # constant
+        return False!
+    elif len(L) == 1: # constant
+        return L[0] == e
+    else:
+        half=len(L)/2
+        if L[half] > e:
+            return bisect_search1(L[:half],e) #not constant, O(n)
+        else:
+            return bisect_search1(L[half:],e) #not constant
+
+O(log n) bisection search calls
+O(n) for each bisection search call to copy list -> O (n log n)
+        BISECTION SEARCH ALTERNATIVE -- keep track of low and high portion of list to be searched and avoid copying the list
+eg:
+def bisect_search2(L, e):
+    def bisect_search_helper(L, e, low, high):
+        print('low: ' + str(low) + '; high: ' + str(high))  #added to visualize
+        if high == low:
+            return L[low] == e
+        mid = (low + high)//2
+        if L[mid] == e:
+            return True
+        elif L[mid] > e:
+            if low == mid: #nothing left to search
+                return False
+            else:
+                return bisect_search_helper(L, e, low, mid - 1)
+        else:
+            return bisect_search_helper(L, e, mid + 1, high)
+    if len(L) == 0:
+        return False
+    else:
+        return bisect_search_helper(L, e, 0, len(L) - 1)
+# constant other than recursive call,so complexity is O(log(n))
+eg:
+def intToStr(i):
+    digits = '0123456789' 
+    if i == 0:
+        return '0'
+    res = ''!
+    while i > 0:
+        res = digits[i%10] + res 
+        i = i//10
+    return result   
+# divide n by 10,so complexity is O(log n)
+    3.LOG-LINEAR COMPLEITY
+        merge sort,归并排序
+    4.POLYNOMIAL COMPLEXITY,多项式复杂度
+        nested loops or recursive function calls
+    5.EXPONENTIAL COMPLEXITY:
+        recursive functions where more than one recursive call for each size of problem
+        Towers of Hanoi
+        t_n tn denote time to solve tower of size n
+        t_n=2*t_n-1+1 -> so order of growth is O(2^n)
+eg: the power set (recursive)
+    given a set of integers (with no repeats), want to generate the collec;on of all possible subsets
+    {1, 2, 3, 4} would generate
+    {}, {1}, {2}, {1, 2}, {3}, {1, 3}, {2, 3}, {1, 2, 3}, {4}, {1, 4}, {2, 4}, {1, 2, 4}, {3, 4}, {1, 3, 4}, {2, 3, 4}, {1, 2, 3, 4}
+def genSubsets(L):
+    res = []
+    if len(L) == 0:
+        return [[]] #list of empty list
+    smaller = genSubsets(L[:-1]) # all subsets without last element
+    extra = L[-1:] # create a list of just last element
+    new = []
+    for small in smaller:
+        new.append(small+extra)  # for all smaller solutions, add one with last element
+    return smaller+new  # combine those with last element and those without
+t_n denote time to solve problem of size n
+s_n denote smaller loop time
+t_n=t_n-1+s_n-1+c，so complexity is O(2^n)
+在该例子中，递归只调用一次，但是循环的次数每次加倍（1，2，4，8，...指数级），因此复杂的是O(2^n) 
+    6.COMPLEXITY OF RECURSIVE FIBONACCI,递归fibonacci的复杂度，O(2^n)O(2^n)
+def fib_recur(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+return fib_recur(n-1) + fib_recur(n-2)
+
+
+
+
+
+
+
+
+
+
+

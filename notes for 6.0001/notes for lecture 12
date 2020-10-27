@@ -1,0 +1,77 @@
+SEARCHING AND SORTING ALGORITHMS
+搜索和排序算法
+1.SEARCHING ALGORITHMS:
+    linear search: O(n)
+        brute force,list does not have to be sorted
+    bisection search:O(log n)
+        list MUST be sorted
+2.SORT ALGORITHMS,排序算法
+    (1)MONKEY SORT,unbounded O()
+def bogo_sort(L):
+    while not is_sorted(L):
+        random.shuffle(L)
+    (2)BUBBLE SORT,冒泡排序
+        compare consecutive pairs of elements
+        swap elements in pair such that smaller is first
+        when reach end of list, start over again
+        stop when no more swaps have been made
+        largest unsorted element always at end after pass, so at most n passes
+def bubble_sort(L):
+    swap = False
+    while not swap:
+        swap = True
+        for j in range(1, len(L)):#内层循环作比较
+            if L[j-1] > L[j]:
+                swap = False
+                temp = L[j]
+                L[j] = L[j-1]
+                L[j-1] = temp
+to do len(L)-1 comparisons and len(L)-1 passes -> O(n^2)
+3.SELECTION SORT,选择排序: O(n^2)
+    extract minimum element #找到最小的元素
+    swap it with element at index 0 #将其分在index 0处
+    in remaining sublist, extract minimum element #在sublist中找到最小的元素
+    swap it with the element at index 1 #将其放在index 1 处
+    ....
+def selection_sort(L):
+    suffixSt = 0
+    while suffixSt != len(L): #外层循环n次
+        for i in range(suffixSt, len(L)):
+            if L[i] < L[suffixSt]: #内层循环n次，worst case
+                L[suffixSt], L[i] = L[i], L[suffixSt] #交换两数
+        suffixSt += 1
+4.MERGE SORT,归并排序 O(n log n)
+    if list is of length 0 or 1, already sorted
+    if list has more than one element, split into two lists（将子列分至只有一个element，sorted）, and sort each
+    merge sorted sublists
+        look at first element of each, move smaller to end of the result
+        when one list empty, just copy rest of other list
+def merge(left, right): #O(n)
+    result = []
+    i,j = 0,0
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    while (i < len(left)):
+        result.append(left[i])
+        i += 1
+    while (j < len(right)):
+        result.append(right[j])
+        j += 1
+    print('merge: ' + str(left) + '&' + str(right) + ' to ' +str(result))
+    return result
+
+def merge_sort(L):
+    print('merge sort: ' + str(L))
+    if len(L) < 2:
+        return L[:]
+    else:
+        middle = len(L)//2 #O(log n)
+        left = merge_sort(L[:middle])
+        right = merge_sort(L[middle:])
+        return merge(left, right) # O(n)
+

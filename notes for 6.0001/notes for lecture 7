@@ -1,0 +1,24 @@
+Lecture 7
+TESTING, DEBUGGING, EXCEPTIONS, ASSERTIONS，测试，调试，异常，断言
+(1)DEFENSIVE PROGRAMMING:
+    Write specifications for functions 写注释
+    Modularize programs 模块化编程，将代码分成可以被分别debugged的小部分
+    Check conditions on inputs/outputs (assertions) 检查输入和输出的情况
+(2)TESTING APPROACHES:
+    test natural boundaries/do random testing
+(3)EXCEPTIONS AND ASSERTIONS 异常和断言
+    使用try except语句进行debug:
+try:#如果try语句块内的语句出现错误，则会执行except语句块内的语句，若try语句块内的语句无错误，则except语句块的语句不被执行，继续执行except块后面的语句
+    a = int(input("Tell me one number:"))
+    b = int(input("Tell me another number:")) print(a/b)
+except:
+    print("Bug in user input.")
+    处理特定的中断
+        except ValueError:
+        except ZeroDivisionError:
+else:#当try语句块内语句无bug时，else语句块内的语句被执行
+finally:
+#出现在try except 或else分句之后，该语句块内的语句总是会被执行，即使出现语法错误或是出现过break,continue return关键字
+(4) EXCEPTIONS AS CONTROL FLOW,
+    raise <exceptionName>(<arguments>) # raise 是关键字,出现一个错误
+eg:rasie ValueError("something is wrong")

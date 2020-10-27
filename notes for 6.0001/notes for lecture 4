@@ -1,0 +1,40 @@
+lecture 4 
+DECOMPOSITION,ABSTRACTION,FUNCTIONS 分解，抽象与函数
+1.DECOMPOSITION IDEA: different devices work together to achieve an end goal
+    divide code into modules
+    achieve decomposition with functions/classes
+    achieve abstraction with function specifications(函数说明) or docstrings（注释）
+2.FUNCTIONS：
+    （1）characteristics:
+        name
+        parameters (0 or more)
+        docstring (optional but recommended)
+        body
+        returns something
+        key word:def
+    （2）eg:
+def is_even_with_return( i ):#i,formal parameter(形式参量)
+    print('with return')
+    remainder = i % 2
+    return remainder == 0 #Python returns the value None, if no return given
+i=3
+is_even_with_return( i )#i,actual parameter(实际参量)
+z=is_even_with_return( i )将函数的返回值赋值给变量z
+    （3）return vs function:
+        return只能存在于函数内
+        一个函数只能有一个返回值
+        return之后的函数内的code永远不会被执行
+    （4）FUNCTIONS AS ARGUMENTS，函数作为参数
+eg:
+def func_a():
+    print ('inside func_a')
+def func_b(y):
+    print ('inside func_b')
+    return y 
+def func_c(z):
+    print ('inside func_c')
+    return z()
+print (func_a())#没有返回值，打印None
+print (5 +func_b(2))
+print (func_c(func_a))#没有返回值，打印None
+    （5注意函数的return，一个函数的声明只在该函数的scope内使用，不会覆盖其它scope的声明（即使变量名相同s）

@@ -1,0 +1,169 @@
+lecture 9
+PYTHON CLASSES and INHERITANCE ,类与继承
+(1)implementing the class vs using the class:
+    implementing a new object type with a class：
+        define the class
+        define data attributes
+        define methods
+    using the new object type in code：
+        create instances of the object type
+        do operations with them
+(2) CLASS DEFINITION INSTANCE OF AN OBJECT TYPE vs INSTANCE OF A CLASS
+    CLASS DEFINITION:
+        use self to refer to some instance while defining the class
+        self is a parameter to methods in class definition
+    INSTANCE OF A CLASS:
+        instance is one specific object
+eg:
+class Animal(object):
+    def __init__(self, age):
+        self.age = age 
+        self.name = None #name is a data attribute even though an instance is not initialized with is as #          a param
+myanimal=Animal(3)
+(3)GETTER AND SETTER METHODS:getter和setter在类之外获取数据属性
+eg:
+class Animal(object):
+    def __init__(self, age):
+        self.age = age 
+        self.name = None
+    def get_age(self): #getter
+        return self.age 
+    def get_name(self):#getter
+        return self.name
+    def set_age(self, newage): #setter
+        self.age = newage
+    def set_name(self, newname=""): #setter
+        self.name = newname
+    def __str__(self):
+        return "animal:"+str(self.name)+":"+str(self.age)
+a = Animal(3)
+a.age #access data attribute 两者结果相同，都返回a的age，该方法允许但不推荐
+a.get_age() #access method
+(4)INFORMATION HIDING:
+eg:author of class definition may change data attribute variable names
+#在类的定义中可以改变数据属性的变量名
+eg:
+class Animal(object):
+    def __init__(self, age):
+        self.years= age #用变量名years代替age
+    def get_age(self):  #a.get_age() NOT a.age,推荐使用前者，以避免因变量名更改而产生的错误
+        return self.years
+(5)DEFAULT ARGUMENTS,缺省参数
+    #若实际参数未给出，形式参数为默认值
+eg:
+def set_name(self, newname=""): #default newname为""
+    self.name = newname
+a = Animal(3) 
+a.set_name()#实参缺省
+print(a.get_name()) ->prints ""
+a.set_name("fluffy")
+print(a.get_name()) prints "fluffy"
+(6)HIERARCHIES #层次体系
+    parent class （superclass)
+    child class (subclass):#inherits all data and behaviors of parent class #继承所有父类的数据和行为
+                           #add more info and behaviour
+                           #override behavior ,覆盖行为
+eg:
+class Animal(object): #in python,everything is a object,
+    def __init__(self, age):
+        self.age = age
+        self.name = None 
+    def get_age(self):
+        return self.age 
+    def get_name(self):
+        return self.name
+    def set_age(self, newage):
+        self.age = newage
+    def set_name(self, newname=""):
+        self.name = newname 
+    def __str__(self):
+        return "animal:"+str(self.name)+":"+str(self.age)
+class Cat(Animal):#cat 继承了Animal的全部属性
+    def speak(self):#add a new function，该method不能被父类Animal使用
+        print("meow")
+    def __str__(self): #覆盖了父类Animal的__str__(self)
+        return "cat:"+str(self.name)+":"+str(self.age)
+(7)WHICH METHOD TO USE?
+    子类可以有与父类相同名字的method
+    在class实例中，优先使用该类中定义的method
+    如果该class中未定义该method，依次寻找其父类（parent，grandparent,...）中的定义，使用最先找到method
+eg:
+class Person(Animal):#parent class is animal
+    def __init__(self, name, age):
+        Animal.__init__(self, age)
+        self.set_name(name)
+        self.friends = [] # add a new data attribute
+    def get_friends(self): #
+        return self.friends
+    def speak(self):
+        print("hello")
+    def add_friend(self, fname):
+        if fname not in self.friends:
+            self.friends.append(fname)
+    def age_diff(self, other):
+        diff = self.age - other.age
+        print(abs(diff), "year difference")
+    def __str__(self): #override Animal's __str__ method
+        return "person:"+str(self.name)+":"+str(self.age)
+class Student(Person):
+    def __init__(self, name, age, major=None): #若实例中major缺省，默认为None
+        Person.__init__(self, name, age)
+        self.major = major
+    def __str__(self):
+        return "student:"+str(self.name)+":"+str(self.age)+":"+str(self.major)
+    def change_major(self, major):
+        self.major = major
+    def speak(self):
+        r = random.random()
+        if r < 0.25:
+            print("i have homework")
+        elif 0.25 <= r < 0.5:
+            print("i need sleep")
+        elif 0.5 <= r < 0.75:
+            print("i should eat")
+        else:
+            print("i am watching tv")
+(8)CLASS VARIABLES,类变量
+    class variables and their values are shared between all instances of a class
+    类变量和该类变量的值在所有该类变量的实例中被使用
+eg:
+class Rabbit(Animal): #Animal is parent class
+    tag = 1 # a class variable,类变量
+    def __init__(self, age, parent1=None, parent2=None):
+        Animal.__init__(self, age)
+        self.parent1 = parent1
+        self.parent2 = parent2
+        self.rid = Rabbit.tag
+        Rabbit.tag += 1
+    def get_rid(self):
+        # zfill used to add leading zeroes 001 instead of 1
+        return str(self.rid).zfill(3)
+    def get_parent1(self):
+        return self.parent1
+    def get_parent2(self):
+        return self.parent2
+    def __add__(self, other):
+        # returning object of same type as this class
+        return Rabbit(0, self, other) #0：age,parent1=self,parent2=other,无self
+    def __eq__(self, other):
+        #note you can’t compare objects directly
+        parents_same = self.parent1.rid == other.parent1.rid \
+                       and self.parent2.rid == other.parent2.rid
+        parents_opposite = self.parent2.rid == other.parent1.rid \
+                           and self.parent1.rid == other.parent2.rid
+        return parents_same or parents_opposite
+    def __str__(self):
+        return "rabbit:"+ self.get_rid()
+
+
+
+
+
+
+
+
+
+
+
+
+

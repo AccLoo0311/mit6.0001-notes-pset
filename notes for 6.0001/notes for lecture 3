@@ -1,0 +1,72 @@
+#lecture 3,STRING MANIPULATION, GUESS-and-CHECK, APPROXIMATIONS, BISECTION
+#字符串操作，猜测检验，近似法，二分法
+1.STRING MANIPULATION
+    （1）len(),返回括号内字符串的长度
+    （2）s = "abc"，square brackets used to perform indexing into a string 
+        使用s[]执行索引，返回字符串s中某个位置的值，
+        index: 0 1 2 indexing always starts at 0，正向顺序索引从s[0]开始
+        index: -3 -2 -1 last element always at index -1，逆向顺序索引从s[-1]开始
+    （3）strings slice，字符串切片 [start:stop:step]，step被省去时默认为1
+        eg：s[3:6]
+            s[::-1],相当于对字符串s各字符反转放置,step为负数时，相当于对字符串s从后往前切片
+    （4）strings are “immutable”，字符串是不可改变的
+        eg:s = "hello"
+           s[0] = 'y',报错,strings are “immutable”
+           s = 'y'+s[1:len(s)]，允许,相当于将一个新的字符串命名为s
+2.for LOOPS RECAP：a for loop variable can iterate over any set of values, not just numbers
+    eg:s = "abcdefgh"
+       for i in s:
+           if i == 'i' or char == 'u':# i是字符串s中的一个字符
+               print("There is an i or u")
+3.GUESS-AND-CHECK（猜测检验），also called exhaustive enumeration（穷举）
+4.APPROXIMATE SOLUTIONS，寻找近似解，maybe skip over the epsilon difference
+5.BISECTION SEARCH,二分法
+    (1)每次迭代间隔变为上一次迭代的一半
+    new guess是区间间隔的中点
+    以下例子使用二分法计算27的立方根:
+    #请注意，以下例子只适用于大于1的正数的立方根，因为小于1的正数的立方根大于high的值
+    cube=27
+    epsilon=0.01
+    num_guesses=0
+    low=0
+    high=cube
+    guess=(low+high)/2
+    while abs(guess**3-cube)>=epsilon:
+        num_guesses=num_guesses+1
+        if guess**3>cube:
+            high=guess
+        else:
+            low=guess
+        guess=(low+high)/2
+    print(guess)
+    print(num_guesses)
+    (2)二分法的算法复杂度为log2N（N/2 N/4 ....    N/2**K）
+       当函数随guess单调变化时，二分法有效
+    (3)以下例子使用二分法可以计算所有数的立方根
+cube=float(input("please input the number of cube: "))
+cube_abs=abs(cube)
+epsilon=0.01
+num_guesses=0
+low=0
+if cube_abs>=1:
+    high=cube_abs
+else:
+    high=1
+guess=(low+high)/2
+while abs(guess**3-cube_abs)>=epsilon:
+    num_guesses=num_guesses+1
+    if guess**3>cube_abs:
+        high=guess
+    else:
+        low=guess
+    guess=(low+high)/2
+if cube <0:
+    guess=-guess
+print(guess)
+print(num_guesses)
+
+
+
+    
+
+
